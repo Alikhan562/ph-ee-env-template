@@ -1,6 +1,6 @@
 # ph-ee-engine
 
-![Version: 1.1.1](https://img.shields.io/badge/Version-1.1.1-informational?style=flat-square)
+![Version: 1.1.2](https://img.shields.io/badge/Version-1.1.2-informational?style=flat-square)
 
 PaymentHub EE Engine
 
@@ -34,8 +34,7 @@ This chart will install Paymenthub
 | channel.LOGGING_LEVEL_ROOT | string | `"INFO"` |  |
 | channel.SPRING_PROFILES_ACTIVE | string | `"bb"` |  |
 | channel.ams.groups | string | `""` |  |
-| channel.deployment.annotations."co.elastic.logs/enabled" | string | `"true"` |  |
-| channel.deployment.annotations.deployTime | string | `"{{ .Values.deployTime }}"` |  |
+| channel.deployment.annotations | object | `{}` |  |
 | channel.enabled | bool | `true` |  |
 | channel.hostname | string | `"paymenthub.qa.oneacrefund.org"` |  |
 | channel.image | string | `"oaftech.azurecr.io/phee-ns/ph-ee-connector-channel"` |  |
@@ -44,6 +43,13 @@ This chart will install Paymenthub
 | channel.ingress.backend.service.name | string | `"ph-ee-connector-channel"` |  |
 | channel.ingress.backend.service.port.number | int | `80` |  |
 | channel.ingress.enabled | bool | `false` |  |
+| channel.limits.cpu | string | `"500m"` |  |
+| channel.limits.memory | string | `"768M"` |  |
+| channel.requests.annotations | object | `{}` |  |
+| channel.requests.backend | object | `{}` |  |
+| channel.requests.cpu | string | `"200m"` |  |
+| channel.requests.memory | string | `"768M"` |  |
+| channel.requests.path | string | `"/channel"` |  |
 | channel.transaction_id_length | int | `20` |  |
 | configmap.apiversion | string | `"v1"` |  |
 | deployment.apiversion | string | `"apps/v1"` |  |
@@ -58,7 +64,7 @@ This chart will install Paymenthub
 | importer_es.requests.memory | string | `"512M"` |  |
 | importer_rdbms.LOGGING_LEVEL_ROOT | string | `"INFO"` |  |
 | importer_rdbms.datasource.host | string | `""` |  |
-| importer_rdbms.datasource.password | string | `""` |  |
+| importer_rdbms.datasource.password | string | `"secretPassword"` |  |
 | importer_rdbms.datasource.port | int | `3306` |  |
 | importer_rdbms.datasource.schema | string | `""` |  |
 | importer_rdbms.datasource.username | string | `""` |  |
@@ -173,7 +179,7 @@ This chart will install Paymenthub
 | operations_app.LOGGING_LEVEL_ROOT | string | `"INFO"` |  |
 | operations_app.SPRING_PROFILES_ACTIVE | string | `""` |  |
 | operations_app.datasource.host | string | `""` |  |
-| operations_app.datasource.password | string | `""` |  |
+| operations_app.datasource.password | string | `"secretPassword"` |  |
 | operations_app.datasource.port | int | `3306` |  |
 | operations_app.datasource.schema | string | `""` |  |
 | operations_app.datasource.username | string | `""` |  |

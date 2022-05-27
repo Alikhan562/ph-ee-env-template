@@ -166,10 +166,17 @@ channel:
         name: ph-ee-connector-channel
         port:
           number: 80
+  limits:
+    memory: "768M"
+    cpu: "500m"
+  requests:
+    memory: "768M"
+    cpu: "200m"
+    path: "/channel"
+    annotations: {}
+    backend: {}
   deployment:
-    annotations:
-      co.elastic.logs/enabled: "true"
-      deployTime: "{{ .Values.deployTime }}"
+    annotations: {}
 
 operations:
   enabled: true
@@ -241,7 +248,7 @@ operations_app:
   token_client_channel_secret: ""
   datasource:
     username: ""
-    password: ""
+    password: "secretPassword"
     host: ""
     port: 3306
     schema: ""
@@ -469,7 +476,7 @@ importer_rdbms:
   LOGGING_LEVEL_ROOT: "INFO"
   datasource:
     username: ""
-    password: ""
+    password: "secretPassword"
     host: ""
     port: 3306
     schema: ""
