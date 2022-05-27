@@ -1,6 +1,6 @@
 # ph-ee-engine
 
-![Version: 1.1.2](https://img.shields.io/badge/Version-1.1.2-informational?style=flat-square)
+![Version: 1.1.3](https://img.shields.io/badge/Version-1.1.3-informational?style=flat-square)
 
 PaymentHub EE Engine
 
@@ -186,7 +186,7 @@ This chart will install Paymenthub
 | operations_app.deployment.annotations | object | `{}` |  |
 | operations_app.enabled | bool | `true` |  |
 | operations_app.hostname | string | `""` |  |
-| operations_app.image | string | `""` |  |
+| operations_app.image | string | `"oaftech.azurecr.io/phee-ns/ph-ee-operations-app"` |  |
 | operations_app.imagePullPolicy | string | `"Always"` |  |
 | operations_app.ingress.enabled | bool | `false` |  |
 | operations_app.limits.cpu | string | `"500m"` |  |
@@ -224,17 +224,6 @@ This chart will install Paymenthub
 | operationsmysql.image.tag | string | `"5.7"` |  |
 | operationsmysql.ingress.enabled | bool | `false` |  |
 | operationsmysql.initdbScripts."setup.sql" | string | `"CREATE DATABASE IF NOT EXISTS oaf;\nCREATE DATABASE IF NOT EXISTS messagegateway;\nGRANT ALL ON *.* TO 'root'@'%';\nGRANT ALL PRIVILEGES ON messagegateway.* TO 'mifos';\nGRANT ALL PRIVILEGES ON oaf.* TO 'mifos';"` |  |
-| ph_ee_connector_ams_mifos.SPRING_PROFILES_ACTIVE | string | `""` |  |
-| ph_ee_connector_ams_mifos.deployment.annotations | object | `{}` |  |
-| ph_ee_connector_ams_mifos.enabled | bool | `true` |  |
-| ph_ee_connector_ams_mifos.image | string | `""` |  |
-| ph_ee_connector_ams_mifos.imagePullPolicy | string | `"Always"` |  |
-| ph_ee_connector_ams_mifos.ingress.enabled | bool | `false` |  |
-| ph_ee_connector_ams_mifos.limits.cpu | string | `"500m"` |  |
-| ph_ee_connector_ams_mifos.limits.memory | string | `"512M"` |  |
-| ph_ee_connector_ams_mifos.replicas | int | `1` |  |
-| ph_ee_connector_ams_mifos.requests.cpu | string | `"200m"` |  |
-| ph_ee_connector_ams_mifos.requests.memory | string | `"512M"` |  |
 | roster_connector.LOGGING_LEVEL_ROOT | string | `"INFO"` |  |
 | roster_connector.SPRING_PROFILES_ACTIVE | string | `""` |  |
 | roster_connector.ams.local.enabled | string | `""` |  |
