@@ -83,51 +83,55 @@ zeebe-operate-helm:
   global:
     zeebe: "zeebe-zeebe"
     elasticsearch:
-      host: "zeebe-elasticsearch"
-      clusterName: "zeebe-elasticsearch"
+      host: "ph-ee-elasticsearch"
+      clusterName: "ph-ee-elasticsearch"
 
-  elasticsearch:
-    enabled: true
-    replicas: 1
-    minimumMasterNodes: 1
-    imageTag: 7.16.3
+elasticsearch:
+  enabled: true
+  replicas: 1
+  minimumMasterNodes: 1
+  imageTag: 7.16.3
+  fullnameOverride: "ph-ee-elasticsearch"
+  clusterName: "ph-ee-elasticsearch"
 
-    # Single Node Solution
-    clusterHealthCheckParams: "wait_for_status=yellow&timeout=100s"
-    master:
-      readinessProbe:
-        httpGet:
-          path: /_cluster/health?wait_for_status=yellow&timeout=5s
-          port: 9200
-        initialDelaySeconds: 30
-    data:
-      readinessProbe:
-        httpGet:
-          path: /_cluster/health?wait_for_status=yellow&timeout=5s
-          port: 9200
-        initialDelaySeconds: 30
+  # Single Node Solution
+  clusterHealthCheckParams: "wait_for_status=yellow&timeout=100s"
+  master:
+    readinessProbe:
+      httpGet:
+        path: /_cluster/health?wait_for_status=yellow&timeout=5s
+        port: 9200
+      initialDelaySeconds: 30
+  data:
+    readinessProbe:
+      httpGet:
+        path: /_cluster/health?wait_for_status=yellow&timeout=5s
+        port: 9200
+      initialDelaySeconds: 30
 
-    # Shrink default JVM heap.
-    esJavaOpts: "-Xmx512m -Xms512m"
+  # Shrink default JVM heap.
+  esJavaOpts: "-Xmx512m -Xms512m"
 
-    # Allocate smaller chunks of memory per pod.
+  # Allocate smaller chunks of memory per pod.
+  resources:
+    requests:
+      cpu: "200m"
+      memory: "1024M"
+    limits:
+      cpu: "1000m"
+      memory: "1024M"
+  volumeClaimTemplate:
+    accessModes: ["ReadWriteOnce"]
+    storageClassName: oaf-storage
     resources:
       requests:
-        cpu: "200m"
-        memory: "1024M"
-      limits:
-        cpu: "1000m"
-        memory: "1024M"
-    volumeClaimTemplate:
-      accessModes: ["ReadWriteOnce"]
-      storageClassName: oaf-storage
-      resources:
-        requests:
-          storage: 10Gi
+        storage: 10Gi
 
 kibana:
   enabled: true
   imageTag: 7.16.3
+  fullnameOverride: "ph-ee-kibana"
+  elasticsearchHosts: "http://ph-ee-elasticsearch:9200/"
   ingress:
     enabled: false
     className: "nginx"
@@ -252,7 +256,7 @@ operations_web:
     enabled: false
   enabled: true
   replicas: 1
-  image: ""
+  image: "oaftech.azurecr.io/phee-ns/ph-ee-operations-app"
   imagePullPolicy: "Always"
   hostname: ""
   webhost: ""
