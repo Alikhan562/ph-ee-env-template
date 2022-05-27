@@ -159,7 +159,11 @@ channel:
   AWS_SECRET_KEY: "xxx"
   image: "oaftech.azurecr.io/phee-ns/ph-ee-connector-channel"
   ams:
-    groups: ""
+    groups:
+      - identifier: "ACCOUNTID"
+        value: "paygops"
+      - identifier: "FOUNDATIONALID"
+        value: "roster"
   ingress:
     enabled: false
     annotations:
@@ -282,12 +286,12 @@ mpesa:
   replicas: 1
   image: "oaftech.azurecr.io/phee-ns/ph-ee-connector-mpesa:v1.0.1"
   imagePullPolicy: "Always"
-  SPRING_PROFILES_ACTIVE: ""
+  SPRING_PROFILES_ACTIVE: "bb"
   LOGGING_LEVEL_ROOT: "INFO"
-  hostname: ""
-  zeebe_broker_contactpoint: ""
-  tenant: ""
-  callback_host: ""
+  hostname: "paymenthub.qa.oneacrefund.org"
+  zeebe_broker_contactpoint: "zeebe-zeebe-gateway:26500"
+  tenant: "oaf"
+  callback_host: "https://paymenthub.qa.oneacrefund.org/mpesa"
   business_short_code: ""
   till_number: ""
   retry_count: 1
